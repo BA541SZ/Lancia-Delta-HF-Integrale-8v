@@ -87,6 +87,25 @@ td:last-child{color:var(--muted);text-align:right}
 .location-map{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);text-decoration:none}
 .location-map:hover{border-color:var(--red);text-decoration:underline}
 .location-map:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* Responsive gallery and touch-friendly controls */
+.photo{display:block;position:relative;cursor:zoom-in;color:inherit}
+.photo::after{content:"⤢";position:absolute;right:.6rem;bottom:.6rem;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:#17150fcc;color:#fff;font-size:1.4rem;pointer-events:none}
+.photo:focus-visible,.contact-details a:focus-visible{outline:3px solid var(--red);outline-offset:4px}
+.languages a{display:inline-flex;align-items:center;min-height:44px}
+.contact-details a{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--card);text-decoration:none;max-width:100%}
+.contact-details a:hover{text-decoration:underline;border-color:var(--red)}
+.lightbox{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#101010;color:#fff}
+.lightbox::backdrop{background:#101010}
+.lightbox[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.lightbox-top{display:flex;justify-content:space-between;align-items:center;padding:max(.75rem,env(safe-area-inset-top)) 1rem .5rem;gap:1rem}
+.lightbox button{display:inline-grid;place-items:center;min-width:48px;min-height:48px;border:1px solid #777;border-radius:6px;background:#292929;color:#fff;font:inherit;cursor:pointer}
+.lightbox button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.lightbox-stage{display:grid;place-items:center;min-height:0;overflow:hidden}
+.lightbox-stage img{width:100%;height:100%;min-height:0;object-fit:contain}
+.lightbox-controls{display:flex;justify-content:center;align-items:center;gap:1.5rem;padding:.75rem 1rem max(.75rem,env(safe-area-inset-bottom))}
+html.gallery-open{overflow:hidden}
+@media(max-width:36rem){main{padding:1.25rem 1rem 2.5rem}h1{font-size:clamp(2rem,8vw,2.75rem);line-height:1.08;margin-top:1.75rem;overflow-wrap:break-word}section{margin-top:2.5rem}.hero{padding:1.25rem}.grid.gal{grid-template-columns:1fr;gap:.85rem}.photo img{object-fit:contain;object-position:center}.photo{background:var(--card)}.languages{gap:.4rem}.languages a{padding:.35rem .65rem}.contact-details a,.location-map{min-height:48px}.lightbox-top{font-size:1rem}}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;1,700&display=swap">
 <link rel="alternate" hreflang="en" href="https://ba541sz.github.io/Lancia-Delta-HF-Integrale-8v/">
@@ -104,7 +123,7 @@ td:last-child{color:var(--muted);text-align:right}
 
   <section id="gallery">
     <h2>Fotos</h2>
-    <div class="grid gal"><div class="slot photo"><img src="images/lancia-front-three-quarter.jpg" alt="Lancia Delta HF Integrale zu verkaufen, rote ursprüngliche 8V-Version mit weißen Leichtmetallfelgen, Dreiviertelansicht von vorne"></div><div class="slot photo cut"><img src="images/lancia-front.png" alt="Roter Lancia Delta HF Integrale, Frontansicht, teilweise abgedeckt"></div><div class="slot photo"><img src="images/lancia-interior.jpg" alt="Innenraum mit schwarzem Lederlenkrad, Kombiinstrument, Mittelkonsole und Schalthebel"></div><div class="slot photo"><img src="images/lancia-rear-three-quarter.jpg" alt="Roter Lancia Delta HF Integrale, Dreiviertelansicht von hinten mit Spoiler, Rückleuchte und weißer Leichtmetallfelge"></div></div>
+    <div class="grid gal"><a class="slot photo" href="images/lancia-front-three-quarter.jpg" aria-haspopup="dialog"><img src="images/lancia-front-three-quarter.jpg" alt="Lancia Delta HF Integrale zu verkaufen, rote ursprüngliche 8V-Version mit weißen Leichtmetallfelgen, Dreiviertelansicht von vorne" decoding="async"></a><a class="slot photo cut" href="images/lancia-front.png" aria-haspopup="dialog"><img src="images/lancia-front.png" alt="Roter Lancia Delta HF Integrale, Frontansicht, teilweise abgedeckt" decoding="async" loading="lazy"></a><a class="slot photo" href="images/lancia-interior.jpg" aria-haspopup="dialog"><img src="images/lancia-interior.jpg" alt="Innenraum mit schwarzem Lederlenkrad, Kombiinstrument, Mittelkonsole und Schalthebel" decoding="async" loading="lazy"></a><a class="slot photo" href="images/lancia-rear-three-quarter.jpg" aria-haspopup="dialog"><img src="images/lancia-rear-three-quarter.jpg" alt="Roter Lancia Delta HF Integrale, Dreiviertelansicht von hinten mit Spoiler, Rückleuchte und weißer Leichtmetallfelge" decoding="async" loading="lazy"></a></div>
   </section>
 
   <section id="specs">
@@ -141,5 +160,57 @@ td:last-child{color:var(--muted);text-align:right}
     </div>
   </section>
 </main>
+<dialog class="lightbox" aria-label="Fotos">
+  <div class="lightbox-top"><span>Fotos</span><button type="button" data-close aria-label="Schließen" autofocus>×</button></div>
+  <div class="lightbox-stage"><img class="lightbox-image" alt=""></div>
+  <div class="lightbox-controls"><button type="button" data-prev aria-label="Vorheriges Foto">←</button><span class="lightbox-counter" aria-live="polite" aria-atomic="true"></span><button type="button" data-next aria-label="Nächstes Foto">→</button></div>
+</dialog>
+
+<script>
+(() => {
+  const dialog = document.querySelector('.lightbox');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  const links = [...document.querySelectorAll('#gallery a.photo')];
+  const image = dialog.querySelector('.lightbox-image');
+  const counter = dialog.querySelector('.lightbox-counter');
+  let current = 0, opener, touchStart = null;
+  function show(index) {
+    current = (index + links.length) % links.length;
+    const thumb = links[current].querySelector('img');
+    image.src = links[current].href;
+    image.alt = thumb.alt;
+    counter.textContent = (current + 1) + ' / ' + links.length;
+  }
+  links.forEach((link, index) => link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault(); opener = link; show(index);
+    dialog.showModal(); document.documentElement.classList.add('gallery-open');
+  }));
+  dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+  dialog.querySelector('[data-prev]').addEventListener('click', () => show(current - 1));
+  dialog.querySelector('[data-next]').addEventListener('click', () => show(current + 1));
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault(); show(current + (event.key === 'ArrowRight' ? 1 : -1));
+    }
+  });
+  dialog.addEventListener('close', () => {
+    document.documentElement.classList.remove('gallery-open');
+    touchStart = null; opener?.focus({preventScroll:true});
+  });
+  const stage = dialog.querySelector('.lightbox-stage');
+  stage.addEventListener('touchstart', event => {
+    touchStart = event.touches.length === 1 ? {x:event.touches[0].clientX,y:event.touches[0].clientY} : null;
+  }, {passive:true});
+  stage.addEventListener('touchend', event => {
+    if (!touchStart || !event.changedTouches.length) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
+    touchStart = null;
+  }, {passive:true});
+  stage.addEventListener('touchcancel', () => {touchStart = null;}, {passive:true});
+})();
+</script>
 </body>
 </html>
