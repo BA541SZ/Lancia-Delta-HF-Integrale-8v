@@ -77,6 +77,13 @@ table{width:100%;border-collapse:collapse;max-width:36rem}
 td{padding:.6rem 0;border-bottom:1px solid var(--line)}
 td:last-child{color:var(--muted);text-align:right}
 .languages{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.5rem;margin:0 0 1rem}.languages a{color:var(--ink);padding:.35rem .75rem;border:1px solid var(--line);border-radius:4px;text-decoration:none}.languages a[aria-current="page"]{font-weight:700;border-color:var(--red)}.languages a:hover,.languages a:focus-visible{text-decoration:underline}
+
+.location{display:flex;align-items:center;flex-wrap:wrap;gap:.75rem 1rem;margin-top:1rem}
+.location-place{display:inline-flex;align-items:center;gap:.5rem;font-weight:600}
+.location-pin{width:1.5rem;height:1.5rem;flex:none;color:var(--red)}
+.location-map{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:.45rem .85rem;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);text-decoration:none}
+.location-map:hover{border-color:var(--red);text-decoration:underline}
+.location-map:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;1,700&display=swap">
 <link rel="alternate" hreflang="en" href="https://ba541sz.github.io/Lancia-Delta-HF-Integrale-8v/">
@@ -114,6 +121,10 @@ td:last-child{color:var(--muted);text-align:right}
   <section id="price">
     <h2>Price</h2>
     <p style="margin:0;font-size:1.5rem;font-weight:600">€39,000</p>
+    <div class="location">
+      <span class="location-place"><svg class="location-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Bratislava, Slovakia</span>
+      <a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Bratislava%2C%20Slovakia" target="_blank" rel="noopener noreferrer">View on Google Maps <span aria-hidden="true">↗</span></a>
+    </div>
   </section>
 
   <section id="contact">
